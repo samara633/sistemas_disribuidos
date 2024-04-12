@@ -1,7 +1,7 @@
 document.getElementById('sumForm').addEventListener('submit', function(event) {
     event.preventDefault();
     var formData = new FormData(this);
-    fetch('/calcular', {
+    fetch('http://127.0.0.1:8000/calcular', {
         method: 'POST',
         body: formData
     })
@@ -10,5 +10,6 @@ document.getElementById('sumForm').addEventListener('submit', function(event) {
         document.getElementById('result').innerText = "La suma total es: " + data;
     })
     .catch(error => console.error('Error:', error));
+    
 });
 

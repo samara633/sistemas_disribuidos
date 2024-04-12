@@ -25,6 +25,11 @@ public class SimpleHttpServer {
     static class CalculadoraHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            // Agregar encabezados CORS
+            exchange.getResponseHeaders().set("Content-Type", "text/plain");
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*"); // Permite solicitudes desde cualquier origen
+            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, OPTIONS"); // Permitir métodos GET, POST y OPTIONS
+            
             if ("POST".equals(exchange.getRequestMethod())) {
                 Map<String, String> params = parseFormData(exchange.getRequestBody());
                 int arraySize = Integer.parseInt(params.get("arraySize"));
@@ -68,8 +73,6 @@ public class SimpleHttpServer {
                 String response = String.valueOf(sumaTotal);
 
                 // Configuramos la respuesta como texto plano
-                exchange.getResponseHeaders().set("Content-Type", "text/plain");
-                // Indicamos el código de estado 200 OK y el tamaño de la respuesta
                 exchange.sendResponseHeaders(200, response.length());
                 // Enviamos la respuesta al cliente
                 OutputStream os = exchange.getResponseBody();
