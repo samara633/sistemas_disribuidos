@@ -7,7 +7,8 @@ document.getElementById('sumForm').addEventListener('submit', function(event) {
     })
     .then(response => response.text())
     .then(data => {
-        document.getElementById('result').innerText = data;
+        document.getElementById('result').innerText = "La suma total es: " + data;
     })
     .catch(error => console.error('Error:', error));
 });
+
