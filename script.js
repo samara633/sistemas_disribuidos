@@ -8,7 +8,6 @@ document.getElementById('sumForm').addEventListener('submit', function(event) {
     .then(response => response.text())
     .then(data => {
         document.getElementById('result').innerText = data;
-
     })
     .catch(error => console.error('Error:', error));
 });
